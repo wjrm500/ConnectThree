@@ -1,4 +1,5 @@
 from Grid import Grid
 
 grid = Grid()
-print(str(grid))
+cols = grid.inverted_grid()
+a = 1
