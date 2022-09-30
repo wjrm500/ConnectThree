@@ -40,16 +40,28 @@ class Grid:
         self.num_available_slots -= 1
     
     def check_winner(self) -> Checker:
-        for row in self.grid:
+        def check_line(line) -> Checker:
             count = 0
-            for i in range(1, len(row)):
-                current_slot, previous_slot = row[i], row[i - 1]
+            for i in range(1, len(line)):
+                current_slot, previous_slot = line[i], line[i - 1]
                 if current_slot == Checker.NULL or current_slot != previous_slot:
                     count = 0
                 else:
                     count += 1
                 if count == self.winning_score - 1:
                     return current_slot
+            return None
+        
+        for row in self.grid:
+            winner = check_line(row)
+            if winner is not None:
+                return winner
+        
+        for col in self.invert_grid(self.grid):
+            winner = check_line(col)
+            if winner is not None:
+                return winner
+            
         return None
     
     def game_over(self) -> bool:
