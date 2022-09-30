@@ -1,5 +1,5 @@
 from Grid import Grid
 
 grid = Grid()
-cols = grid.inverted_grid()
-a = 1
+cols = grid.available_cols()
+print(cols)

@@ -14,5 +14,13 @@ class Grid:
             s += '| ' + ' | '.join([slot.value for slot in row]) + ' |\n'
         return s.rstrip('\n')
     
-    def inverted_grid(self) -> List:
-        return list(map(list, zip(*self.grid)))
+    def invert_grid(self, grid: List) -> List:
+        return list(map(list, zip(*grid)))
+    
+    def available_cols(self) -> List[int]:
+        inverted_grid = self.invert_grid(self.grid)
+        col_idxs = []
+        for idx, col in enumerate(inverted_grid):
+            if col[0] == Slot.EMPTY:
+                col_idxs.append(idx)
+        return col_idxs
