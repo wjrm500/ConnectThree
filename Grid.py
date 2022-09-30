@@ -19,8 +19,4 @@ class Grid:
     
     def available_cols(self) -> List[int]:
         inverted_grid = self.invert_grid(self.grid)
-        col_idxs = []
-        for idx, col in enumerate(inverted_grid):
-            if col[0] == Slot.EMPTY:
-                col_idxs.append(idx)
-        return col_idxs
+        return [idx for idx, col in enumerate(inverted_grid) if col[0] == Slot.EMPTY]
