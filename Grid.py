@@ -74,21 +74,11 @@ class Grid:
         return None
     
     def check_winner(self) -> Checker:
-        for row in self.rows:
-            winner = self.check_winner_on_line(row)
-            if winner is not None:
-                return winner
-        
-        for col in self.cols:
-            winner = self.check_winner_on_line(col)
-            if winner is not None:
-                return winner
-
-        for diag in self.diags:
-            winner = self.check_winner_on_line(diag)
-            if winner is not None:
-                return winner   
-            
+        for lines in [self.rows, self.cols, self.diags]:
+            for line in lines:
+                winner = self.check_winner_on_line(line)
+                if winner is not None:
+                    return winner
         return None
     
     def game_over(self) -> bool:
