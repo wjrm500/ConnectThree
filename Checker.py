@@ -1,6 +1,6 @@
 import enum
 
-class Slot(enum.Enum):
-    EMPTY = '.'
+class Checker(enum.Enum):
+    NULL = '.'
     RED = 'R'
     YELLOW = 'Y'
