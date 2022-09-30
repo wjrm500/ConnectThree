@@ -35,3 +35,7 @@ class Grid:
             else:
                 row_idx -=1
         self.grid = self.invert_grid(inverted_grid)
+        self.num_available_slots -= 1
+    
+    def game_over(self) -> bool:
+        return self.num_available_slots == 0
