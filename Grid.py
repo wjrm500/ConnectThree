@@ -14,9 +14,5 @@ class Grid:
             s += '| ' + ' | '.join([slot.value for slot in row]) + ' |\n'
         return s.rstrip('\n')
     
-    def inverted_grid(self):
-        inverted_grid = [[] for _ in range(self.num_cols)]
-        for row in self.grid:
-            for idx, slot in enumerate(row):
-                inverted_grid[idx].append(slot)
-        return inverted_grid
+    def inverted_grid(self) -> List:
+        return list(map(list, zip(*self.grid)))
