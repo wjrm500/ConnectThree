@@ -2,11 +2,13 @@ from typing import List
 from Checker import Checker
 
 class Grid:
-    def __init__(self, num_rows: int, num_cols: int) -> None:
+    def __init__(self, num_rows: int, num_cols: int, winning_score: int = 3) -> None:
         self.num_rows = num_rows
         self.num_cols = num_cols
+        self.winning_score = winning_score
         self.grid = [[Checker.NULL for _ in range(num_cols)] for _ in range(num_rows)]
         self.num_available_slots = num_rows * num_cols
+        self.winner = None
 
     def __str__(self) -> str:
         s = ''
@@ -37,5 +39,19 @@ class Grid:
         self.grid = self.invert_grid(inverted_grid)
         self.num_available_slots -= 1
     
+    def check_winner(self) -> Checker:
+        for row in self.grid:
+            count = 0
+            for i in range(1, len(row)):
+                current_slot, previous_slot = row[i], row[i - 1]
+                if current_slot == Checker.NULL or current_slot != previous_slot:
+                    count = 0
+                else:
+                    count += 1
+                if count == self.winning_score - 1:
+                    return current_slot
+        return None
+    
     def game_over(self) -> bool:
-        return self.num_available_slots == 0
+        self.winner = self.check_winner()
+        return self.num_available_slots == 0 or self.winner is not None

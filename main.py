@@ -13,3 +13,4 @@ while not grid.game_over():
     checker = swap(checker)
     print(str(grid))
     print('\n')
+print(grid.check_winner())
